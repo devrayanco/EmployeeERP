@@ -1,0 +1,52 @@
+<div class="container">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nome de Usuário</label>
+      <input type="text" id="name" formControlName="name" class="form-control">
+      <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" 
+           class="text-danger">
+        Nome obrigatório
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" formControlName="email" class="form-control">
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" 
+           class="text-danger">
+        Insira um e-mail válido
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input type="password" id="password" formControlName="password" class="form-control">
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" 
+           class="text-danger">
+        A senha deve ser ao menos 6 caractéres
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirme a senha</label>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control">
+      <div *ngIf="registerForm.hasError('mismatch')" class="text-danger">
+        As senhas não correspondem
+      </div>
+    </div>
+
+    <!-- Error/Success Messages -->
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid || isLoading">
+      <span *ngIf="!isLoading">Cadastrar</span>
+      <span *ngIf="isLoading">Processing...</span>
+    </button>
+  </form>
+</div>

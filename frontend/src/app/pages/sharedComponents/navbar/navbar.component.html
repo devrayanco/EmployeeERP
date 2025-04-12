@@ -1,0 +1,23 @@
+<nav class="navbar">
+  <ul class="navbar-menu">
+    <li *ngFor="let item of menu" class="navbar-item" [class.has-submenu]="item.submenu">
+      <ng-container *ngIf="!item.submenu; else dropdown">
+        <a [routerLink]="item.rota">{{ item.nome }}</a>
+      </ng-container>
+
+      <ng-template #dropdown>
+        <div class="dropdown">
+          <span class="dropdown-toggle">
+            {{ item.nome }}
+            <span class="arrow">▼</span>
+          </span>
+          <ul class="dropdown-menu">
+            <li *ngFor="let subItem of item.submenu">
+              <a [routerLink]="subItem.rota">{{ subItem.nome }}</a>
+            </li>
+          </ul>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+</nav>

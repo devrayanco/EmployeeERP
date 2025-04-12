@@ -1,0 +1,13 @@
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+  height: 100vh;
+  padding-top: 1rem;
+}
+
+main {
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 56px);
+}

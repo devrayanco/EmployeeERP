@@ -36,18 +36,28 @@ export class EmployeeListComponent implements OnInit {
     });
   }
 
-deleteEmployee(id: string): void {
-  const confirmDelete = confirm('Tem certeza que deseja deletar este funcionário?');
-  if (confirmDelete) {
-    this.employeeService.delete(id).subscribe({
-      next: () => {
-        alert('Funcionário excluído com sucesso!');
-        this.getEmployees();
-      },
-      error: () => {
-        alert('Erro ao excluir funcionário.');
-      }
-    });
+  deleteEmployee(id: string | undefined): void {
+    if (!id) {
+      alert('ID do funcionário não encontrado.');
+      return;
+    }
+  
+    const confirmDelete = confirm('Tem certeza que deseja deletar este funcionário?');
+    if (confirmDelete) {
+      this.employeeService.delete(id).subscribe({
+        next: () => {
+          alert('Funcionário excluído com sucesso!');
+          this.getEmployees();
+        },
+        error: () => {
+          alert('Erro ao excluir funcionário.');
+        }
+      });
+    }
   }
-}
+  
+  goBack(): void {
+    location.href = '/home';
+  }
+  
 }

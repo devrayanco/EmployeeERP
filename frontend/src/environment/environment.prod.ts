@@ -1,5 +1,6 @@
 export const environment = {
     production: false,
+    apiKey: "https://employee-api-chi.vercel.app/",
     firebase: {
         apiKey: "AIzaSyCPDZY04NyXtc5nr33w1y10XIXFwDzrndQ",
         authDomain: "cadastro-funcionarios-3e5c3.firebaseapp.com",

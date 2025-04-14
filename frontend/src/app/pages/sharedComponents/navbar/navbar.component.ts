@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -9,18 +9,18 @@ import { RouterModule } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  userName: string = 'Usuário';
+
   menu = [
-    {
-      nome: 'Usuário',
-      rota: '/register'
-    },
-    {
-      nome: 'Funcionário',
-      submenu: [
-        { nome: 'Lista de Funcionários', rota: '/employee' },
-        { nome: 'Registro de Funcionário', rota: '/novo' }
-      ]
-    }
+    { nome: 'Listar Funcionários', rota: '/employee' },
+    { nome: 'Cadastrar Funcionário', rota: '/novo' }
   ];
+
+  ngOnInit() {
+    const name = localStorage.getItem('userName');
+    if (name) {
+      this.userName = name;
+    }
+  }
 }

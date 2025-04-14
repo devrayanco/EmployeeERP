@@ -1,16 +1,15 @@
-// src/app/services/employee.service.ts
-
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Employee } from '../models/employee.model';
 import { Observable } from 'rxjs';
+import { environment } from '../../environment/environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmployeeService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:3001/api/employees';
+  private baseUrl = `${environment.apiKey}api/employees`;
 
   getAll(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.baseUrl);
@@ -20,16 +19,22 @@ export class EmployeeService {
     return this.http.get<Employee>(`${this.baseUrl}/${id}`);
   }
 
-  create(employee: Partial<Employee>): Observable<any> {
-    return this.http.post(this.baseUrl, employee);
+  create(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(this.baseUrl, employee);
   }
 
-  update(id: string, employee: Partial<Employee>): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, employee);
+  update(id: string, employee: Employee): Observable<Employee> {
+    return this.http.put<Employee>(`${this.baseUrl}/${id}`, employee);
   }
 
   delete(id: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
-  
+
+  createOrUpdate(employee: Employee, employeeId?: string): Observable<Employee> {
+    if (employeeId) {
+      return this.update(employeeId, employee);
+    }
+    return this.create(employee);
+  }
 }

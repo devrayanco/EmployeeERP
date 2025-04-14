@@ -35,7 +35,6 @@
       </div>
     </div>
 
-    <!-- Error/Success Messages -->
     <div *ngIf="errorMessage" class="alert alert-danger">
       {{ errorMessage }}
     </div>
@@ -43,10 +42,14 @@
       {{ successMessage }}
     </div>
 
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid || isLoading">
+    <button type="submit" class="btn btn-success me-3" [disabled]="registerForm.invalid || isLoading">
       <span *ngIf="!isLoading">Cadastrar</span>
       <span *ngIf="isLoading">Processing...</span>
     </button>
+
+    <button type="button" class="btn btn-secondary md-3" (click)="goBack()">
+      Voltar
+    </button>
+
   </form>
 </div>

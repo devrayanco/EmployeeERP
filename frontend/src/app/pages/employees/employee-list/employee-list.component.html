@@ -1,12 +1,18 @@
 <div class="employee-list container mt-4">
   <h2 class="mb-3">Lista de Funcionários</h2>
 
-  <div *ngIf="isLoading" class="text-center my-4">
+  <div class="text-center my-4" [class.d-none]="!isLoading">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Carregando...</span>
     </div>
   </div>
 
+  <div class="my-4">
+    <a routerLink="/novo" class="btn btn-success me-4">+ Novo Funcionário</a>
+
+    <a routerLink="/home" class="btn btn-secondary">Voltar</a>
+  </div>
+  
   <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
 
   <div *ngIf="!isLoading && !error && employees.length === 0" class="alert alert-warning">
@@ -20,25 +26,22 @@
           <h5 class="card-title">{{ emp.nome }}</h5>
           <p class="card-text mb-1"><strong>Email:</strong> {{ emp.email }}</p>
           <p class="card-text mb-1"><strong>CPF:</strong> {{ emp.cpf }}</p>
-          <p class="card-text"><strong>Cidade:</strong> {{ emp.endereco?.cidade || 'N/A' }}</p>
+          <p class="card-text"><strong>Cidade:</strong> {{ emp.endereco.cidade || 'N/A' }}</p>
         </div>
         <div class="card-footer d-flex justify-content-between">
-          <a [routerLink]="['/editar', emp.id]" class="btn btn-sm btn-outline-primary">
+          <a [routerLink]="['/editar', emp.id]" class="btn btn-sm btn-outline-success">
             ✏️ Editar
           </a>
           <button
-            class="btn btn-sm btn-outline-danger"
-            (click)="deleteEmployee(emp.id!)"
-            aria-label="Excluir funcionário"
-          >
-            🗑️ Excluir
-          </button>
+          class="btn btn-sm btn-outline-danger"
+          (click)="emp.id ? deleteEmployee(emp.id) : null"
+          aria-label="Excluir funcionário">
+          Excluir
+        </button>        
         </div>
       </div>
     </div>
   </div>
-
-  <div class="mt-4">
-    <a routerLink="/novo" class="btn btn-success">+ Novo Funcionário</a>
-  </div>
+  <div><p class="my-4">
+  </p></div>
 </div>

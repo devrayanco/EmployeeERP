@@ -9,6 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 
   {
     path: '',
@@ -19,7 +20,6 @@ export const routes: Routes = [
       { path: 'employee', component: EmployeeListComponent },
       { path: 'novo', component: EmployeeFormComponent },
       { path: 'editar/:id', component: EmployeeFormComponent },
-      { path: 'register', component: RegisterComponent },
       { path: 'home', component: HomeComponent },
     ]
   },
